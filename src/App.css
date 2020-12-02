@@ -1,0 +1,97 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.todo-board {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 50px;
+}
+
+.todo-item {
+  flex-grow: 1;
+  flex-basis: 275px;
+  margin: 10px 29px;
+  border: 1px solid #fff;
+  max-width: 275px;
+}
+
+.default {
+  position: absolute;
+  z-index: 100;
+  left: -500px;
+  top: 40px;
+  background: #fff;
+  transition: all 0.5s;
+}
+
+.add-todo-card {
+  position: absolute;
+  z-index: 100;
+  left: -50px;
+  top: 40px;
+  background: #fff;
+}
+
+.btn-container,
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-todo-btn {
+  display: flex !important;
+  margin-left: 75px;
+  cursor: pointer;
+  transition: transform 0.5s !important;
+}
+
+.add-todo-btn:hover {
+  color: rgba(255, 255, 255, 0.774);
+  transform: rotate(45deg);
+}
+
+.close-btn {
+  transform: rotate(45deg);
+  color: #dc143c;
+}
+
+.close-btn:hover {
+  color: #8b0000;
+}
+
+.btn-delete-all {
+  margin-right: 75px;
+  cursor: pointer;
+}
+
+.btn-delete-all:hover {
+  color: #dc143c;
+}
+
+.color-input {
+  display: grid;
+  width: 100%;
+  margin: auto;
+}
+
+.Mui-disabled,
+.MuiFormLabel-root {
+  color: black !important;
+}
+
+.MuiCardActions-root {
+  justify-content: center;
+}
