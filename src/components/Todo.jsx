@@ -48,7 +48,6 @@ const Todo = ({ title, description, color, id }) => {
   //Submit edited data
   const onSubmit = data => {
     if (editMode) {
-      console.log(id, data);
       const newTodo = { ...data, id: id };
       dispatch({ type: "UPDATE_TODO", id, newTodo });
     }
