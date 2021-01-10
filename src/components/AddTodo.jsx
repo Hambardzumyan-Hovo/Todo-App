@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import { useForm } from "react-hook-form";
-import { addTodoApi } from "../api/todoApi";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -29,11 +28,10 @@ const AddTodo = ({ card, showAddTodo }) => {
 
   //Adding new todo card
   const onSubmit = data => {
-    addTodoApi(data).then(res => {
-      const newTodo = res;
-      dispatch({ type: "ADD_TODO", newTodo });
-      reset();
-    });
+    const cardId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+    const newTodo = { ...data, id: cardId };
+    dispatch({ type: "ADD_TODO", newTodo });
+    reset();
     showAddTodo(false);
   };
 

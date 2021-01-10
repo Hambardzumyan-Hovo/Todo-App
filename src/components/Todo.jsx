@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { deleteTodoApi, editTodoApi } from "../api/todoApi";
 import { useDispatch } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
 import { useForm } from "react-hook-form";
@@ -17,7 +16,6 @@ const useStyles = makeStyles({
     minWidth: 275,
     maxWidth: 275,
   },
-
   input: {
     margin: 10,
     width: "92%",
@@ -38,9 +36,8 @@ const Todo = ({ title, description, color, id }) => {
 
   //Delete todo card
   const handleDelete = () => {
-    deleteTodoApi(id).then(() => {
-      dispatch({ type: "DELETE_TODO", id });
-    });
+    console.log(id);
+    dispatch({ type: "DELETE_TODO", id });
   };
 
   //Toggle edit mode
@@ -48,13 +45,12 @@ const Todo = ({ title, description, color, id }) => {
     setEditMode(!editMode);
   };
 
-  //Submit edited data to api
+  //Submit edited data
   const onSubmit = data => {
     if (editMode) {
-      editTodoApi(id, data).then(res => {
-        const newTodo = res;
-        dispatch({ type: "UPDATE_TODO", id, newTodo });
-      });
+      console.log(id, data);
+      const newTodo = { ...data, id: id };
+      dispatch({ type: "UPDATE_TODO", id, newTodo });
     }
   };
 
@@ -108,7 +104,6 @@ const Todo = ({ title, description, color, id }) => {
               {editMode ? <EditIcon /> : <SaveIcon />}
               {editMode ? "Edit" : "Save"}
             </Button>
-
             <Button size='small' onClick={handleDelete}>
               <DeleteIcon /> Delete
             </Button>

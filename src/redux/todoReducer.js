@@ -9,11 +9,11 @@ const todoReducer = (state = initialState, action) => {
       return [...state, action.newTodo];
     }
     case "DELETE_TODO": {
-      return state.filter(todo => todo._id !== action.id);
+      return state.filter(todo => todo.id !== action.id);
     }
     case "UPDATE_TODO": {
       return state.map(todo => {
-        if (todo._id === action.id) {
+        if (todo.id === action.id) {
           return action.newTodo;
         } else {
           return todo;

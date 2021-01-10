@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Todo from "./Todo";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AddTodo from "./AddTodo";
-import { deleteTodoApi, getTodosApi } from "../api/todoApi";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const Todos = () => {
@@ -19,18 +18,19 @@ const Todos = () => {
   //Delete all todos and clearing state
   const deleteBoard = () => {
     dispatch({ type: "DELETE_ALL" });
-    todos.forEach(todo => {
-      deleteTodoApi(todo._id);
-    });
+    localStorage.clear();
   };
 
-  //Getting all todos from api
+  //Getting all todos from local storage
   useEffect(() => {
-    getTodosApi().then(res => {
-      const allTodos = res;
-      dispatch({ type: "GET_TODOS", allTodos });
-    });
+    let allTodos = JSON.parse(localStorage.getItem("todos"));
+    allTodos && dispatch({ type: "GET_TODOS", allTodos });
   }, [dispatch]);
+
+  // Setting local storage
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  });
 
   return (
     <div>
@@ -52,7 +52,7 @@ const Todos = () => {
       <div className='todo-board'>
         <AddTodo card={newCard} showAddTodo={showAddTodo} />
         {todos.map(s => (
-          <Todo key={s._id} id={s._id} title={s.title} description={s.description} color={s.color} />
+          <Todo key={s.id} id={s.id} title={s.title} description={s.description} color={s.color} />
         ))}
       </div>
     </div>
